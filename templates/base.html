@@ -1,0 +1,91 @@
+<!doctype html>
+
+<html>
+
+    <head>
+
+        <title>My Blog!</title>
+
+        <style type="text/css">
+
+            .error {
+
+                color: red;
+
+            }
+
+            textarea {
+
+                width: 300px;
+
+                height: 200px;
+
+            }
+
+            h3 {
+
+                text-align: center;
+
+            }
+
+
+
+        </style>
+
+    </head>
+
+
+
+<body>
+
+    <div style='float: right'>
+
+          {% if 'username' in session %}
+
+            {{ session['username'] }}
+
+            <form action="/logout" method="post" id='logout'>
+
+              <input type="submit" value="Log Out" />
+
+            </form>
+
+          {% else %}
+
+            <a href="login">login</a> | <a href="register">register</a>
+
+          {% endif %}
+
+        </div>
+
+    <a href='./blog'><h1>View the Full Blog!</h1></a>
+
+    <a href='./'>Browse Posts by User</a>
+
+
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+
+        <ul>
+
+        {% for category,message in messages %}
+
+            <li class="{{category}}">{{message}}</li>
+
+        {% endfor %}
+
+        </ul>
+
+    {% endwith %}
+
+
+
+    {% block content %}
+
+    {% endblock %}
+
+
+
+</body>
+
+</html>
